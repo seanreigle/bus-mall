@@ -25,3 +25,18 @@ button:hover {
   background: #888;
   color:#222;
 }
+
+.header {
+  color:white;
+  text-align:center;
+  text-decoration:underline;
+}
+
+.middle {
+  color:white;
+  font-size:16pt;
+}
+
+.middle h2 {
+  text-align:center;
+}
