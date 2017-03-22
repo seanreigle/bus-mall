@@ -10,7 +10,7 @@ var img3 = document.getElementById('right');
 
 function Products(name, path) {
   this.name = name.split('.')[0];
-  this.path = path;
+  this.path = 'imgs/' + name;
   this.itemClick = 0;
   this.imageShown = 0;
   productArray.push(this);
@@ -57,12 +57,10 @@ function handleTheClick(){
   totalClicks++;
   var productIdx = this.alt;
   productArray[productIdx].itemClick++;
-
   if (totalClicks === clickLimit) {
     img1.removeEventListener('click', handleTheClick);
     img2.removeEventListener('click', handleTheClick);
     img3.removeEventListener('click', handleTheClick);
-    productClicks();
   }
 };
 
@@ -70,14 +68,38 @@ img1.addEventListener('click', handleTheClick);
 img2.addEventListener('click', handleTheClick);
 img3.addEventListener('click', handleTheClick);
 
-function productClicks(){
-  var content = document.getElementById('content');
-  var ul = document.createElement('ul');
-  content.appendChild(ul);
-  for (var i = 0; i < productArray.length; i++) {
-    var li = document.createElement('li');
-    var dataStr = productArray[i].itemClick + ' clicks for ' + productArray[i].name;
-    li.innerText = dataStr;
-    ul.appendChild(li);
+var displayButton = document.getElementById('display-button');
+displayButton.addEventListener('click', makeChart);
+
+function makeChart () {
+  function myImageNames () {
+    var names = [];
+    for(var i = 0; i < imageArray.length; i++) {
+      names.push(imageArray[i].name);
+    }
+    return names;
+  };
+
+  function manageClicks () {
+    var numberOfClicks = [];
+    for(var i = 0; i < imageArray.length; i++) {
+      numberOfClicks.push(imageArray[i].total);
+    }
+    return numberOfClicks;
   }
+
+  var myChartData = {
+    labels: myImageNames(),
+    datasets: [{
+      label: 'Results',
+      backgroundColor: 'rgba(59, 225, 203, 0)',
+      strokeColor : '#ACC26D',
+      data: manageClicks(),
+    }]
+  };
+
+  var displayResults = document.getElementById('results-chart').getContext('2d');
+  new Chart.Bar(displayResults, {
+    data: myChartData
+  });
 }
