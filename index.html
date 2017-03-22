@@ -1,22 +1,35 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css" />
-    <title>Bus Mall Day 1</title>
+    <title>BusMall</title>
+    <link rel = "stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
   </head>
   <body>
-    <main id='content'>
-      <div class="images">
-        <img src="" alt="" id="left" />
+    <header>
+      <div class="header">
+        <h1>BusMall</h1>
       </div>
-      <div class="images">
-        <img src="" alt="" id="center" />
+    </header>
+    <section class ="top">
+      <h2>Welcome to BusMall!</h2>
+    <p>You will be shown 3 images, please click on your favorite product.</p>
+    <p>You will do this 25 times and at the end, your results will be displayed. Click an image to begin.</p>
+    </section>
+    <section class="container">
+      <div>
+        <img class="random-image" id="left" src="http://placehold.it/300x400" alt="" style="float: left; width: 20%; margin-right: 1%; margin-bottom: 0.5em;">
+        <img class="random-image" id="center" src="http://placehold.it/300x400" alt="" style="float: left; width: 20%; margin-right: 1%; margin-bottom: 0.5em;">
+        <img class="random-image" id="right" src="http://placehold.it/300x400" alt="" style="float: left; width: 20%; margin-right: 1%; margin-bottom: 0.5em;">
+      <p style="clear: both;">
       </div>
-      <div class="images">
-        <img src="" alt="" id="right" />
-      </div>
-      <div class="clearfix"></div>
-    </main>
-    <script src="js/app.js" charset="utf-8"></script>
+        <button type="button" id="display-button">Display Results</button>
+    </section>
+    <div class="chart">
+      <canvas id="results-chart" width="1446" height="400"></canvas>
+    </div>
+  <script src="js/app.js"></script>
   </body>
+</html>
