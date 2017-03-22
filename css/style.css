@@ -1,42 +1,9 @@
-body {
-  background-color:#40587F
+img {
+  width: 200px;
+  float: left;
+  border: thin solid red;
 }
 
-.container div {
-  display: inline-block;
-  margin-top: 15px;
-  margin-right: 15px;
-  margin-left: 138px;
-  margin-bottom: 75px;
-}
-
-#display-button {
-  margin-bottom: 50px;
-  font-family: arial, sans-serif;
-  font-size: 24px;
-  color: #FFF;
-  background-color: #111;
-  padding: 10px 15px;
-  margin-left: 475px;
-  cursor:pointer;
-}
-
-button:hover {
-  background: #888;
-  color:#222;
-}
-
-.header {
-  color:white;
-  text-align:center;
-  text-decoration:underline;
-}
-
-.middle {
-  color:white;
-  font-size:16pt;
-}
-
-.middle h2 {
-  text-align:center;
+.clearfix {
+  clear: both;
 }
