@@ -9,7 +9,7 @@ img {
   clear: both;
 }
 
-/*#display-button {
+#display-button {
   position:absolute;
   font-family: Helvetica, arial, sans-serif;
   font-size: 24px;
@@ -18,11 +18,12 @@ img {
   color: #e3e3e3;
   background-color: #444;
   padding: 10px 15px;
-  margin-left: 500px;
+  margin-left: 510px;
+  margin-top:50px;
   cursor: pointer;
 }
 
-button:hover {
+.display-button:hover {
   background: #888;
   color:#222;
 }
@@ -30,7 +31,7 @@ button:hover {
 #results-chart {
   display: none;
   margin-top:100px;
-}*/
+}
 
 body {
   font-family:Times,Arial,sans-serif;

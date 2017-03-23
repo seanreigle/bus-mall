@@ -63,7 +63,6 @@ function handleTheClick(){
     img1.removeEventListener('click', handleTheClick);
     img2.removeEventListener('click', handleTheClick);
     img3.removeEventListener('click', handleTheClick);
-    productClicks();
   }
 };
 
@@ -71,14 +70,47 @@ img1.addEventListener('click', handleTheClick);
 img2.addEventListener('click', handleTheClick);
 img3.addEventListener('click', handleTheClick);
 
-function productClicks(){
-  var content = document.getElementById('content');
-  var ul = document.createElement('ul');
-  content.appendChild(ul);
-  for (var i = 0; i < productArray.length; i++) {
-    var li = document.createElement('li');
-    var dataStr = productArray[i].itemClick + ' clicks for ' + productArray[i].itemName;
-    li.innerText = dataStr;
-    ul.appendChild(li);
+function makeChart () {
+  function myImageNames () {
+    var names = [];
+    for(var i = 0; i < imageArray.length; i++) {
+      names.push(imageArray[i].name);
+    }
+    return names;
+  };
+
+  function manageClicks () {
+    var numberOfClicks = [];
+    for(var i = 0; i < imageArray.length; i++) {
+      numberOfClicks.push(imageArray[i].total);
+    }
+    localStorage.busMall = JSON.stringify(imageArray);
+    return numberOfClicks;
+  }
+
+  var myChartData = {
+    labels: myImageNames(),
+    datasets: [{
+      label: 'Results',
+      backgroundColor: 'rgba(59, 225, 203, 0)',
+      strokeColor : '#ACC26D',
+      data: manageClicks(),
+    }]
+  };
+
+  var displayResults = document.getElementById('results-chart').getContext('2d');
+  new Chart.Bar(displayResults, {
+    data: myChartData
+  });
+}
+
+function checkLocalStorage() {
+  if(localStorage.busMall) {
+    console.log('local storage exists');
+    imageArray = JSON.parse(localStorage.busMall);
+  } else {
+    console.log('local storage empty');
   }
 }
+
+checkLocalStorage();
