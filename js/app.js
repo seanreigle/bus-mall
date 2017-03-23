@@ -1,6 +1,7 @@
 'use strict';
 
 var imageArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
+var nameArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
 var productArray = [];
 var totalClicks = 0;
@@ -8,9 +9,9 @@ var img1 = document.getElementById('left');
 var img2 = document.getElementById('center');
 var img3 = document.getElementById('right');
 
-function Products(name, path) {
-  this.name = name.split('.')[0];
-  this.path = 'imgs/' + name;
+function Products(itemName, itemPath) {
+  this.itemName = itemName;
+  this.itemPath = itemPath;
   this.itemClick = 0;
   this.imageShown = 0;
   productArray.push(this);
@@ -18,7 +19,7 @@ function Products(name, path) {
 
 for (var i = 0; i < imageArray.length; i++) {
   var filePath = 'imgs/' + imageArray[i];
-  new Products(imageArray[i], filePath);
+  new Products(nameArray[i], filePath);
 }
 
 function randomImgIndex(){
@@ -38,12 +39,12 @@ function randomImage(){
   var prod1 = productArray[currentImgIndexes[0]];
   var prod2 = productArray[currentImgIndexes[1]];
   var prod3 = productArray[currentImgIndexes[2]];
-  img1.src = prod1.path;
-  img2.src = prod2.path;
-  img3.src = prod3.path;
-  img1.alt = currentImgIndexes[0];
-  img2.alt = currentImgIndexes[1];
-  img3.alt = currentImgIndexes[2];
+  img1.src = prod1.itemPath;
+  img2.src = prod2.itemPath;
+  img3.src = prod3.itemPath;
+  img1.alt = currentImgIndexes[0]; // 12
+  img2.alt = currentImgIndexes[1]; // 7
+  img3.alt = currentImgIndexes[2]; // 13
   prevImgIndexes = currentImgIndexes;
   prod1.imageShown++;
   prod2.imageShown++;
@@ -57,10 +58,12 @@ function handleTheClick(){
   totalClicks++;
   var productIdx = this.alt;
   productArray[productIdx].itemClick++;
+
   if (totalClicks === clickLimit) {
     img1.removeEventListener('click', handleTheClick);
     img2.removeEventListener('click', handleTheClick);
     img3.removeEventListener('click', handleTheClick);
+    productClicks();
   }
 };
 
@@ -68,38 +71,14 @@ img1.addEventListener('click', handleTheClick);
 img2.addEventListener('click', handleTheClick);
 img3.addEventListener('click', handleTheClick);
 
-var displayButton = document.getElementById('display-button');
-displayButton.addEventListener('click', makeChart);
-
-function makeChart () {
-  function myImageNames () {
-    var names = [];
-    for(var i = 0; i < imageArray.length; i++) {
-      names.push(imageArray[i].name);
-    }
-    return names;
-  };
-
-  function manageClicks () {
-    var numberOfClicks = [];
-    for(var i = 0; i < imageArray.length; i++) {
-      numberOfClicks.push(imageArray[i].total);
-    }
-    return numberOfClicks;
+function productClicks(){
+  var content = document.getElementById('content');
+  var ul = document.createElement('ul');
+  content.appendChild(ul);
+  for (var i = 0; i < productArray.length; i++) {
+    var li = document.createElement('li');
+    var dataStr = productArray[i].itemClick + ' clicks for ' + productArray[i].itemName;
+    li.innerText = dataStr;
+    ul.appendChild(li);
   }
-
-  var myChartData = {
-    labels: myImageNames(),
-    datasets: [{
-      label: 'Results',
-      backgroundColor: 'rgba(59, 225, 203, 0)',
-      strokeColor : '#ACC26D',
-      data: manageClicks(),
-    }]
-  };
-
-  var displayResults = document.getElementById('results-chart').getContext('2d');
-  new Chart.Bar(displayResults, {
-    data: myChartData
-  });
 }
