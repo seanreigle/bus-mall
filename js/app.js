@@ -1,72 +1,99 @@
 'use strict';
 
-var imageArray = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
-
-var productArray = [];
-var totalClicks = 0;
-var img1 = document.getElementById('left');
-var img2 = document.getElementById('center');
-var img3 = document.getElementById('right');
-
-function Products(name, path) {
-  this.name = name.split('.')[0];
-  this.path = 'imgs/' + name;
-  this.itemClick = 0;
-  this.imageShown = 0;
-  productArray.push(this);
-};
-
-for (var i = 0; i < imageArray.length; i++) {
-  var filePath = 'imgs/' + imageArray[i];
-  new Products(imageArray[i], filePath);
+function generateMathRand () {
+  return Math.floor(Math.random() * myImagesArray.length);
 }
 
-function randomImgIndex(){
-  return Math.floor(Math.random() * imageArray.length);
+var totalClicks = 0;
+var myImagesArray = [];
+
+var imageNames = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','usb.gif','water-can.jpg','wine-glass.jpg'];
+
+function randomImage() {
+  var a = generateMathRand();
+  return myImagesArray[a];
+}
+
+function Image(name) {
+  this.name = name.split('.')[0];
+  this.path = 'imgs/' + name;
+  this.tally = 0;
+  this.views = 0;
+}
+
+for(var i = 0; i < imageNames.length; i++) {
+  myImagesArray.push(new Image(imageNames[i]));
+}
+
+function generateImage () {
+  if(totalClicks < 25) {
+    var rand1 = randomImage();
+    var rand2 = randomImage();
+    var rand3 = randomImage();
+    while (rand1 === rand2 || rand1 === rand3) {
+      rand1 = randomImage();
+    }
+    while (rand2 === rand1 || rand2 === rand3) {
+      rand2 = randomImage();
+    }
+    while (rand3 === rand1 || rand3 === rand2) {
+      rand3 = randomImage();
+    }
+    rand1.views += 1;
+    rand2.views += 1;
+    rand3.views += 1;
+    var imageOne = document.getElementById('image-one');
+    var imageTwo = document.getElementById('image-two');
+    var imageThree = document.getElementById('image-three');
+    imageOne.src = rand1.path;
+    imageOne.name = rand1.name;
+    imageTwo.src = rand2.path;
+    imageTwo.name = rand2.name;
+    imageThree.src = rand3.path;
+    imageThree.name = rand3.name;
+  }
 };
 
-var prevImgIndexes = [];
-function randomImage(){
-  var currentImgIndexes = [];
-  while (currentImgIndexes.length < 3) {
-    var imgSelector = randomImgIndex();
-    if (!currentImgIndexes.includes(imgSelector) && !prevImgIndexes.includes(imgSelector)) {
-      currentImgIndexes.push(imgSelector);
+function handleClick(event) {
+  for(var i = 0; i < myImagesArray.length; i++) {
+    if (event.target.name === myImagesArray[i].name) {
+      myImagesArray[i].tally += 1;
     }
   }
 
-  var prod1 = productArray[currentImgIndexes[0]];
-  var prod2 = productArray[currentImgIndexes[1]];
-  var prod3 = productArray[currentImgIndexes[2]];
-  img1.src = prod1.path;
-  img2.src = prod2.path;
-  img3.src = prod3.path;
-  img1.alt = currentImgIndexes[0];
-  img2.alt = currentImgIndexes[1];
-  img3.alt = currentImgIndexes[2];
-  prevImgIndexes = currentImgIndexes;
-  prod1.imageShown++;
-  prod2.imageShown++;
-  prod3.imageShown++;
-};
-randomImage();
-
-var clickLimit = 25;
-function handleTheClick(){
-  randomImage();
-  totalClicks++;
-  var productIdx = this.alt;
-  productArray[productIdx].itemClick++;
-  if (totalClicks === clickLimit) {
-    img1.removeEventListener('click', handleTheClick);
-    img2.removeEventListener('click', handleTheClick);
-    img3.removeEventListener('click', handleTheClick);
+  totalClicks += 1;
+  if (totalClicks < 25) {
+    generateImage();
+  } else {
+    var imgs = document.querySelectorAll('.random-image');
+    document.removeEventListener('click', imgs);
+    document.getElementById('display-button').style.visibility = 'visible';
   }
+}
+
+var theImages = document.getElementsByClassName('random-image');
+for (var i = 0; i < theImages.length; i++) {
+  theImages[i].addEventListener('click', handleClick);
 };
 
-img1.addEventListener('click', handleTheClick);
-img2.addEventListener('click', handleTheClick);
-img3.addEventListener('click', handleTheClick);
+function incrementTally(imageName){
+  for(var i = 0; i < myImagesArray.length; i++) {
+    if(myImagesArray[i].name == imageName) {
+      myImagesArray[i].tally += 1;
+      break;
+    }
+  }
+}
+
+generateImage();
+
+document.addEventListener('click', function() {
+  if (totalClicks > 25) {
+    for(var i = 0; i < theImages.length; i++) {
+      theImages[i].removeEventListener('click', handleClick);
+    }
+  }
+});
 
 var displayButton = document.getElementById('display-button');
 displayButton.addEventListener('click', makeChart);
@@ -74,27 +101,28 @@ displayButton.addEventListener('click', makeChart);
 function makeChart () {
   function myImageNames () {
     var names = [];
-    for(var i = 0; i < imageArray.length; i++) {
-      names.push(imageArray[i].name);
+    for(var i = 0; i < myImagesArray.length; i++) {
+      names.push(myImagesArray[i].name);
     }
     return names;
   };
 
-  function manageClicks () {
+  function harvestClicks () {
     var numberOfClicks = [];
-    for(var i = 0; i < imageArray.length; i++) {
-      numberOfClicks.push(imageArray[i].total);
+    for(var i = 0; i < myImagesArray.length; i++) {
+      numberOfClicks.push(myImagesArray[i].tally);
     }
+    localStorage.busMall = JSON.stringify(myImagesArray);
     return numberOfClicks;
   }
 
   var myChartData = {
     labels: myImageNames(),
     datasets: [{
-      label: 'Results',
-      backgroundColor: 'rgba(59, 225, 203, 0)',
+      label: 'Your Results',
+      backgroundColor: 'rgba(59, 225, 203, .5)',
       strokeColor : '#ACC26D',
-      data: manageClicks(),
+      data: harvestClicks(),
     }]
   };
 
@@ -102,4 +130,15 @@ function makeChart () {
   new Chart.Bar(displayResults, {
     data: myChartData
   });
+};
+
+function checkLocalStorage() {
+  if(localStorage.busMall) {
+    console.log('local storage exists');
+    myImagesArray = JSON.parse(localStorage.busMall);
+  } else {
+    console.log('local storage empty');
+  }
 }
+
+checkLocalStorage();
