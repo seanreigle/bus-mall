@@ -3,10 +3,12 @@
 body {
   font-family: Arial, sans-serif;
   font-size: 18px;
-  background: #12607F;
+  background-color: #12607F;
   color: white;
-  background: url(nyc.jpg) no-repeat;
-  background-size: 100%;
+  background: url(../imgs/nyc.jpg) no-repeat center center fixed;
+  background-size: cover;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 header {
@@ -93,4 +95,26 @@ img {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   background-color: inherit;
+}
+
+#summarysection {
+  width: 70%;
+  margin:auto;
+}
+
+#summaryh2 {
+  text-align: center;
+  margin: 5% auto;
+}
+
+#button {
+  width: 20%;
+  height: 4vw;
+  display: block;
+  box-shadow: 0px 0px 5px 1px rgba(255, 60, 7, 0.57);
+  background-color: rgba(255, 255, 0, 1 );
+  color: #000;
+  font-size: 1.5vw;
+  border: .3vw outset;
+  margin-left: 350px;
 }
