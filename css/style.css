@@ -1,59 +1,93 @@
-img {
-  width: 200px;
-  float: left;
-  border: thin solid white;
-  margin-left: 115pt;
-}
-
-.clearfix {
-  clear: both;
-}
-
-#display-button {
-  position:absolute;
-  font-family: Helvetica, arial, sans-serif;
-  font-size: 24px;
-  border-radius: 8px;
-  border: none;
-  color: #e3e3e3;
-  background-color: #444;
-  padding: 10px 15px;
-  margin-left: 510px;
-  margin-top:50px;
-  cursor: pointer;
-}
-
-.display-button:hover {
-  background: #888;
-  color:#222;
-}
-
-#results-chart {
-  display: none;
-  margin-top:100px;
-}
 
 body {
-  font-family:Times,Arial,sans-serif;
-  font-size:14px;
-  background-color:#12607F;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  background-color: #12607F;
+  color: white;
 }
 
-.top h2 {
-  color:white;
-  font-size:20pt;
+header {
+  height:350px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 -450px;
+}
+
+h1 {
+  color: white;
   text-align: center;
+  font-size: 80px;
+  padding: 10px;
+  font-family: 'Droid Sans', sans-serif;
+  text-shadow: 4px 4px #000;
+  background-color:inherit;
 }
 
-.header h1 {
-  color:white;
+header {
+  background: rgba(0, 0, 50, 0.2);
+  position: relative;
+  top: 40px;
+  bottom: 40px;
+  color: white;
+}
+
+section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+section h2 {
+  font-size: 32px;
   text-align: center;
-  text-decoration: underline;
-  font-size:30pt;
+  padding-top: 70px;
 }
 
-.top p {
-  color:white;
-  text-align:center;
+section p {
+  font-size: 24px;
+  text-align: center;
+  padding-top: 35px;
+}
 
+.second-paragraph {
+  font-size: 18px;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  padding-left: 65px;
+}
+
+img {
+  height: 200px;
+  width: 300px;
+  margin-left:120px;
+}
+
+.container image {
+  display: inline-block;
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 75px;
+}
+
+@keyframes slide {
+  from { left: 100%;}
+  to { left: -100%;}
+}
+#scrolling_text {
+  position:relative;
+  top:100px;
+  left:0;
+  width:100%;
+  height:120px;
+  font-size:100px;
+  color:white;
+  font-family:cursive;
+  animation-name: slide;
+  animation-duration: 8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  background-color: inherit;
 }
