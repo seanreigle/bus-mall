@@ -2,7 +2,8 @@
 body {
   font-family: Arial, sans-serif;
   font-size: 18px;
-  background-color: #12607F
+  background-color: #12607F;
+  color: white;
 }
 
 header {
@@ -19,12 +20,15 @@ h1 {
   padding: 10px;
   font-family: 'Droid Sans', sans-serif;
   text-shadow: 4px 4px #000;
+  background-color:inherit;
 }
 
-.header {
-  background: rgba(0, 0, 50, 0.3);
+header {
+  background: rgba(0, 0, 50, 0.2);
   position: relative;
-  top: 80px;
+  top: 40px;
+  bottom: 40px;
+  color: white;
 }
 
 section {
@@ -57,33 +61,15 @@ section p {
 img {
   height: 200px;
   width: 300px;
-  margin-left:30px;
+  margin-left:120px;
 }
 
-.container div {
+.container image {
   display: inline-block;
   margin-top: 15px;
   margin-right: 15px;
   margin-left: 15px;
   margin-bottom: 75px;
-}
-
-#display-button {
-  margin-bottom: 50px;
-  font-family: Arial, sans-serif, serif;
-  font-size: 24px;
-  border-radius: 8px;
-  border: none;
-  color: #e3e3e3;
-  background-color: #444;
-  padding: 10px 15px;
-  margin-left: 459px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #888;
-  color:#222;
 }
 
 @keyframes slide {
@@ -92,7 +78,7 @@ button:hover {
 }
 #scrolling_text {
   position:relative;
-  top:0;
+  top:100px;
   left:0;
   width:100%;
   height:120px;
@@ -103,13 +89,5 @@ button:hover {
   animation-duration: 8s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  -webkit-animation-name: slide;
-  -webkit-animation-duration: 10s;
-  -webkit-animation-timing-function:linear;
-  -webkit-animation-iteration-count: infinite;
-}
-
-.pacman {
-  height:8%;
-  width:8%;
+  background-color: inherit;
 }
