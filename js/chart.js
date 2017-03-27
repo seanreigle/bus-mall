@@ -23,6 +23,7 @@ function chart() {
       label: 'Percentage of Your Clicks',
       data:percentOfTotal,
       backgroundColor: 'rgba(66, 0, 255, 1)',
+      fontColor: 'white',
       borderColor: 'rgb(0, 0, 0)',
       borderWidth: 2,
       hoverBorderColor: 'rgba(255, 66, 0, 1)',
@@ -31,6 +32,7 @@ function chart() {
       label: 'Percent of Clicks When Shown',
       data: percentOfShownClicks,
       backgroundColor: 'rgba(255, 255, 0, 1',
+      fontColor: 'white',
       borderColor: 'rgb(0,0,0)',
       borderWidth: 1,
       hoverBorderColor: 'rgba(66,0,255, 1)',
@@ -47,7 +49,7 @@ function chart() {
         text: 'Your Results!',
         position: 'top',
         fontSize: 20,
-        fontColor: '#000'
+        fontColor: 'white'
       },
       scales:{
         xAxes: [{
@@ -60,7 +62,7 @@ function chart() {
         yAxes: [{
           barThickness: 30,
           ticks: {
-            fontColor: 'black'
+            fontColor: 'white'
           },
         }]
       }

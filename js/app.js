@@ -94,7 +94,7 @@ function showResults() {
   var summarysection = document.getElementById('summarysection');
   var button = document.createElement('button');
   button.id = 'button';
-  button.innerText = 'Clear Local Storage';
+  button.innerText = 'Clear Results';
   button.addEventListener('click', function(event) {
     event.preventDefault();
     localStorage.clear();
