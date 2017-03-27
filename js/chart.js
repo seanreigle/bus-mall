@@ -1,4 +1,5 @@
 'use strict';
+
 function chart() {
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
@@ -21,18 +22,20 @@ function chart() {
     datasets: [{
       label: 'Percentage of Your Clicks',
       data:percentOfTotal,
-      backgroundColor: 'rgba(66, 0, 255, 0.54)',
+      backgroundColor: 'rgba(66, 0, 255, 1)',
+      fontColor: 'white',
       borderColor: 'rgb(0, 0, 0)',
       borderWidth: 2,
-      hoverBorderColor: 'rgba(255, 66, 0,.54)',
+      hoverBorderColor: 'rgba(255, 66, 0, 1)',
       hoverBorderWidth: 3
     },{
       label: 'Percent of Clicks When Shown',
       data: percentOfShownClicks,
-      backgroundColor: 'rgba(255,66,0,.54)',
+      backgroundColor: 'rgba(255, 255, 0, 1',
+      fontColor: 'white',
       borderColor: 'rgb(0,0,0)',
       borderWidth: 1,
-      hoverBorderColor: 'rgba(66,0,255,.54)',
+      hoverBorderColor: 'rgba(66,0,255, 1)',
       hoverBorderWidth: 3
     }]
   };
@@ -45,8 +48,8 @@ function chart() {
         display: true,
         text: 'Your Results!',
         position: 'top',
-        fontSize: 18,
-        fontColor: '#000'
+        fontSize: 20,
+        fontColor: 'white'
       },
       scales:{
         xAxes: [{
@@ -57,9 +60,9 @@ function chart() {
 
         }],
         yAxes: [{
-          barThickness: 20,
+          barThickness: 30,
           ticks: {
-            fontColor: 'black'
+            fontColor: 'white'
           },
         }]
       }

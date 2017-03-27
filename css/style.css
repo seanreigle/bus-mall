@@ -3,10 +3,12 @@
 body {
   font-family: Arial, sans-serif;
   font-size: 18px;
-  background: #12607F;
+  background-color: #12607F;
   color: white;
-  background: url(nyc.jpg) no-repeat;
-  background-size: 100%;
+  background: url(../imgs/seattle.jpg) no-repeat center center fixed;
+  background-size: cover;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 header {
@@ -14,6 +16,7 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 -450px;
+
 }
 
 h1 {
@@ -24,6 +27,7 @@ h1 {
   font-family: 'Droid Sans', sans-serif;
   text-shadow: 4px 4px #000;
   background-color:inherit;
+  margin-top:180px;
 }
 
 header {
@@ -31,7 +35,7 @@ header {
   position: relative;
   top: 40px;
   bottom: 40px;
-  color: white;
+  color: black;
 }
 
 section {
@@ -75,22 +79,83 @@ img {
   margin-bottom: 75px;
 }
 
-@keyframes slide {
-  from { left: 100%;}
-  to { left: -100%;}
+#summarysection {
+  width: 70%;
+  margin:auto;
 }
-#scrolling_text {
-  position:relative;
-  top:100px;
-  left:0;
-  width:100%;
-  height:120px;
-  font-size:100px;
-  color:white;
-  font-family:cursive;
-  animation-name: slide;
-  animation-duration: 8s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  background-color: inherit;
+
+#summaryh2 {
+  text-align: center;
+  margin: 5% auto;
 }
+
+#button {
+  width: 20%;
+  height: 4vw;
+  display: block;
+  box-shadow: 0px 0px 5px 1px rgba(255, 60, 7, 0.55);
+  color: #000;
+  font-size: 1.5vw;
+  border: .3vw outset;
+  margin-left: 350px;
+  background: #F00;
+  border-radius: 6px;
+  transition-property: background, border-radius;
+  transition-duration: .2s, 1s;
+  transition-timing-function: linear, ease-in;
+  transition-delay: 0s, 1s;
+}
+
+#button:hover {
+  background: #0F0;
+  border-radius: 50%;
+  color: #000;
+}
+
+
+.ex span {
+  opacity: 0;
+  transition: opacity 1300ms
+}
+
+.ex span:nth-child(1)  { transition-delay:  200ms }
+.ex span:nth-child(2)  { transition-delay: 1200ms }
+.ex span:nth-child(3)  { transition-delay:  800ms }
+.ex span:nth-child(4)  { transition-delay:  300ms }
+.ex span:nth-child(5)  { transition-delay:  700ms }
+.ex span:nth-child(6)  { transition-delay:  600ms }
+.ex span:nth-child(7)  { transition-delay:  400ms }
+.ex span:nth-child(8)  { transition-delay:  900ms }
+.ex span:nth-child(9)  { transition-delay:  700ms }
+.ex span:nth-child(10) { transition-delay:   50ms }
+
+.ex:hover span {
+  opacity: 1
+}
+.busmall, .busmall * {
+  cursor: default;
+}
+.busmall {
+  position: relative;
+}
+.busmall {
+  line-height: normal;
+  margin-bottom: 8rem;
+}
+.welcome {
+  max-width: 100%;
+  overflow: auto;
+}
+
+.lettering {
+  background-image: linear-gradient(135deg, #444B5C, #011137);
+  background-color: #9D223C;
+  color: #FFF;
+  padding: 1em 0;
+  text-align: center;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: .4em;
+  font-size: 1.8em;
+  margin-top: 2.5rem;
+  }
